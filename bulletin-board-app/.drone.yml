@@ -8,6 +8,7 @@ steps:
   commands:
   - cd bulletin-board-app
   - npm install
+  - docker build --tag bulletinboard:1.0 .
 
 - name: publish
   image: plugins/docker
