@@ -2,6 +2,8 @@ kind: pipeline
 name: default
 
 
+# Testing the Build and Push
+
 steps:
   - name: build-push
     image: plugins/docker
