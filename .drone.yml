@@ -6,7 +6,6 @@ steps:
 - name: build
   image: node:current-slim
   commands:
-  - cd /usr/src/app
   - npm install
 
 - name: publish
