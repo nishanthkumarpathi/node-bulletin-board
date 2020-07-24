@@ -6,6 +6,7 @@ steps:
 - name: build
   image: node:current-slim
   commands:
+  - cd node-bulletin-board
   - npm install
 
 - name: publish
