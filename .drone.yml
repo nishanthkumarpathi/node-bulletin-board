@@ -17,3 +17,14 @@ steps:
 #  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
   - docker build --tag bulletinboard:1.0 /drone/src/.git/node-bulletin-board/Dockefile
   - docker push nishanthkp/bulletinboard:1.0
+  
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+volumes:
+- name: dockersock
+  temp: {}
