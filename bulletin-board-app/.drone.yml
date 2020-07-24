@@ -7,6 +7,7 @@ steps:
   image: node:current-slim
   commands:
   - echo `pwd`
+  - ls -l
   - npm install
 
 - name: publish
