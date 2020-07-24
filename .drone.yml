@@ -2,29 +2,24 @@ kind: pipeline
 name: default
 
 steps:
-- name: build-push
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
-  environment:
-    DOCKER_USER:
-      from_secret: DOCKER_USER
-    DOCKER_PASSWORD:
-      from_secret: DOCKER_PASSWORD
+
+- name: build
+  image: node:current-slim
   commands:
-  - sleep 5 ## give docker enough time to start
-#  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-  - docker build --tag bulletinboard:1.0 /drone/src/.git/node-bulletin-board/Dockefile
-  - docker push nishanthkp/bulletinboard:1.0
-  
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
+  - cd /usr/src/app
+  - npm install
+
+- name: publish
+  image: plugins/docker
+  settings:
+    repo: nishanthkp/node-app
+    auto_tag: true
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
+
 volumes:
-- name: dockersock
-  temp: {}
+- name: docker
+  host:
+    path: /var/run/docker.sock
