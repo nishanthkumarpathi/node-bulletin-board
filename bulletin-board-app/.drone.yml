@@ -6,8 +6,7 @@ steps:
 - name: build
   image: node:current-slim
   commands:
-  - echo `pwd`
-  - ls -l
+  - cd bulletin-board-app
   - npm install
 
 - name: publish
